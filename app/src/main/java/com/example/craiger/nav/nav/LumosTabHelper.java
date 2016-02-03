@@ -8,7 +8,7 @@ import android.support.design.widget.TabLayout;
 import com.example.craiger.nav.fragment.DashboardFragment;
 import com.example.craiger.nav.fragment.GameListFragment;
 import com.example.craiger.nav.fragment.PurchaseFragment;
-import com.example.craiger.nav.nav.LumosTabManager.TabCreatorHolder;
+import com.example.craiger.nav.nav.LumosTabbedView.TabCreatorHolder;
 
 /**
  * Created by craig on 2/1/16.

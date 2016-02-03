@@ -17,7 +17,7 @@ import com.example.craiger.nav.fragment.AbstractNavFragment;
  *
  * Created by craig on 2/2/16.
  */
-public class LumosTabManager {
+public class LumosTabbedView {
 
     private TabLayout mTabLayout;
     private LumosTabFragmentAdapter mAdapter;
@@ -27,7 +27,7 @@ public class LumosTabManager {
 
     //this class will be the middle man between the TabLayout, and the adapter.
 
-    public LumosTabManager(TabLayout tabLayout, ViewPager viewPager, FragmentManager fm) {
+    public LumosTabbedView(TabLayout tabLayout, ViewPager viewPager, FragmentManager fm) {
         mTabLayout = tabLayout;
         mViewPager = viewPager;
         mAdapter = new LumosTabFragmentAdapter(fm);

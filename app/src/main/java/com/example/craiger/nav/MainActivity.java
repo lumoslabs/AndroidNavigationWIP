@@ -10,13 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.craiger.nav.fragment.DashboardFragment;
 import com.example.craiger.nav.fragment.PurchaseFragment;
 import com.example.craiger.nav.nav.LumosTabHelper;
-import com.example.craiger.nav.nav.LumosTabManager;
+import com.example.craiger.nav.nav.LumosTabbedView;
 
 public class MainActivity extends AppCompatActivity implements DashboardFragment.ButtonPress {
 
     private static String TAG = "MainActivity";
 
-    LumosTabManager tabManager;
+    LumosTabbedView tabManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity implements DashboardFragment
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.activity_main_tabbed_tab_layout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        tabManager = new LumosTabManager(tabLayout, mViewPager, getSupportFragmentManager());
+        tabManager = new LumosTabbedView(tabLayout, mViewPager, getSupportFragmentManager());
 
         //todo better way to get the TabHolder objects
-        List<LumosTabManager.TabCreatorHolder> tabsToUse = LumosTabHelper.getTabsForUser(tabLayout, true);
+        List<LumosTabbedView.TabCreatorHolder> tabsToUse = LumosTabHelper.getTabsForUser(tabLayout, true);
 
         tabManager.initWithTabCreators(tabsToUse);
     }
