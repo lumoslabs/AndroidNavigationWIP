@@ -13,13 +13,13 @@ import android.widget.TextView;
 /**
  * Created by craig on 2/2/16.
  */
-public class PurchaseFragment extends AbstractNavFragment {
+public class MoreFragment extends AbstractNavFragment {
     private String mText;
 
-    public static PurchaseFragment newInstance(String text) {
+    public static MoreFragment newInstance(String text) {
         Bundle args = new Bundle();
         args.putString("key", text);
-        PurchaseFragment fragment = new PurchaseFragment();
+        MoreFragment fragment = new MoreFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,6 +34,7 @@ public class PurchaseFragment extends AbstractNavFragment {
         frame.setBackgroundColor(getResources().getColor(android.R.color.white, inflater.getContext().getTheme()));
         frame.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams
             .MATCH_PARENT));
+
         TextView tv = new TextView(inflater.getContext());
         tv.setTextColor(getResources().getColor(android.R.color.black, inflater.getContext().getTheme()));
         tv.setText(mText);
