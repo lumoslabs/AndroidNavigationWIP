@@ -7,5 +7,5 @@ import android.support.v4.app.Fragment;
  */
 public abstract class AbstractNavFragment extends Fragment {
 
-    public abstract String getFragmentTag();
+
 }

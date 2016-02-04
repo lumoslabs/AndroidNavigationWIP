@@ -1,47 +1,54 @@
 package com.example.craiger.nav;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.craiger.nav.fragment.DashboardFragment;
-import com.example.craiger.nav.fragment.PurchaseFragment;
-import com.example.craiger.nav.nav.LumosTabHelper;
+import com.example.craiger.nav.fragment.GameListFragment;
+import com.example.craiger.nav.nav.LumosTabHolder;
 import com.example.craiger.nav.nav.LumosTabbedView;
 
-public class MainActivity extends AppCompatActivity implements DashboardFragment.ButtonPress {
+public class MainActivity extends AppCompatActivity implements DashboardFragment.ButtonPress, GameListFragment
+    .PressSplitTestButtonCallback {
 
     private static String TAG = "MainActivity";
 
-    LumosTabbedView tabManager;
+    LumosTabbedView newTabView;
+    LumosTabHolder mAllLumosTabHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupTabbedNav();
+        setupTabbedNavWithTabsObject();
     }
 
-    private void setupTabbedNav() {
+    private void setupTabbedNavWithTabsObject() {
         final ViewPager mViewPager = (ViewPager) findViewById(R.id.activity_main_tabbed_pager);
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.activity_main_tabbed_tab_layout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        tabManager = new LumosTabbedView(tabLayout, mViewPager, getSupportFragmentManager());
-
-        //todo better way to get the TabHolder objects
-        List<LumosTabbedView.TabCreatorHolder> tabsToUse = LumosTabHelper.getTabsForUser(tabLayout, true);
-
-        tabManager.initWithTabCreators(tabsToUse);
+        //this will insantiate all of the TabLayout.Tab objects
+        mAllLumosTabHolder = new LumosTabHolder(tabLayout, true, true);
+        newTabView = new LumosTabbedView(tabLayout, mViewPager, getSupportFragmentManager(), mAllLumosTabHolder.getActiveTabs());
     }
 
 
     @Override
     public void handlePress() {
-        tabManager.removeTab(PurchaseFragment.TAG);
+        //tell the Tabs object that some data changed (would be coming in from bus or something)
+        //then tell the views to refresh (will reset the tabLayout, and notify on the adapter
+        mAllLumosTabHolder.userChangedEvent();
+        newTabView.reloadTabAndAdapter();
+    }
+
+    @Override
+    public void handlePressSplitTestButton() {
+        mAllLumosTabHolder.splitTestChangedEvent();
+        newTabView.reloadTabAndAdapter();
+
     }
 }
