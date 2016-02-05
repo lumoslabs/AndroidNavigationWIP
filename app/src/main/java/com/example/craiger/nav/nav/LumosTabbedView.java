@@ -30,7 +30,30 @@ public class LumosTabbedView {
         mActiveNavTabs = activeNavTabs;
         mTabLayout = tabLayout;
         mViewPager = viewPager;
-        mTabChangedListener = new TabLayout.TabLayoutOnPageChangeListener(mTabLayout);
+//        mTabChangedListener = new TabLayout.TabLayoutOnPageChangeListener(mTabLayout);
+
+        //        mViewPager.addOnPageChangeListener(mTabChangedListener);
+        //bug with listener... https://code.google.com/p/android/issues/detail?id=181534
+        mTabChangedListener = new TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
+            private int mPreviousScrollState;
+
+            private int mScrollState;
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                this.mPreviousScrollState = this.mScrollState;
+                this.mScrollState = state;
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (this.mScrollState == 2 && this.mPreviousScrollState == 0) {
+                    super.onPageSelected(position);
+                }
+            }
+        };
+
 
         //add the "active" tabs into the tabLayout
         for (LumosNavTab tab : mActiveNavTabs) {
@@ -41,8 +64,8 @@ public class LumosTabbedView {
         mAdapter = new LumosTabFragmentItemIdStatePagerAdapter(fm, mActiveNavTabs);
 
         mViewPager.setAdapter(mAdapter);
-        mViewPager.addOnPageChangeListener(mTabChangedListener);
         mTabLayout.setOnTabSelectedListener(mLumosTabSelectedListener);
+        mViewPager.addOnPageChangeListener(mTabChangedListener);
 
     }
 

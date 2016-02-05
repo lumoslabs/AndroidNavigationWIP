@@ -6,11 +6,14 @@ import java.util.List;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
 
+import com.example.craiger.nav.R;
 import com.example.craiger.nav.fragment.AbstractNavFragment;
 import com.example.craiger.nav.fragment.DashboardFragment;
 import com.example.craiger.nav.fragment.GameListFragment;
+import com.example.craiger.nav.fragment.LabsFragment;
 import com.example.craiger.nav.fragment.MoreFragment;
 import com.example.craiger.nav.fragment.PurchaseFragment;
+import com.example.craiger.nav.fragment.StatsFragment;
 
 /**
  * This class is in charge of holding onto ALL Tabs, and also tabs that are considered "active"
@@ -38,8 +41,10 @@ public class LumosTabHolder {
 
         //add ALL of the tabs, their methods will determine if they get put into the layout
         allNavTabs.add(new DashboardTab(tabLayout));
-        allNavTabs.add(new PurchaseTab(tabLayout));
+        allNavTabs.add(new StatsTab(tabLayout));
         allNavTabs.add(new GamesTab(tabLayout));
+        allNavTabs.add(new PurchaseTab(tabLayout));
+        allNavTabs.add(new LabsTab(tabLayout));
         allNavTabs.add(new MoreTab(tabLayout));
 
         refreshActiveTabs();
@@ -85,7 +90,7 @@ public class LumosTabHolder {
         private TabLayout.Tab mTab;
 
         public DashboardTab(TabLayout tabLayout) {
-            mTab = tabLayout.newTab().setText("DASH");
+            mTab = tabLayout.newTab().setIcon(R.drawable.selector_home_tab);
         }
 
         @Override
@@ -109,11 +114,39 @@ public class LumosTabHolder {
         }
     }
 
+    public class StatsTab extends LumosNavTab {
+        private TabLayout.Tab mTab;
+
+        public StatsTab(TabLayout tabLayout) {
+            mTab = tabLayout.newTab().setIcon(R.drawable.selector_stats_tab);
+        }
+
+        @Override
+        public TabLayout.Tab getTab() {
+            return mTab;
+        }
+
+        @Override
+        public AbstractNavFragment getFragment(Context context) {
+            return StatsFragment.newInstance("from StatsTab in TABS class");
+        }
+
+        @Override
+        public Class<? extends AbstractNavFragment> getNavFragmentClass() {
+            return StatsFragment.class;
+        }
+
+        @Override
+        public boolean shouldBeIncludedInLayout() {
+            return true;
+        }
+    }
+
     public class PurchaseTab extends LumosNavTab {
         private TabLayout.Tab mTab;
 
         public PurchaseTab(TabLayout tabLayout) {
-            mTab = tabLayout.newTab().setText("$$$$");
+            mTab = tabLayout.newTab().setIcon(R.drawable.selector_unlock_tab);
         }
 
         @Override
@@ -137,11 +170,39 @@ public class LumosTabHolder {
         }
     }
 
+    public class LabsTab extends LumosNavTab {
+        private TabLayout.Tab mTab;
+
+        public LabsTab(TabLayout tabLayout) {
+            mTab = tabLayout.newTab().setIcon(R.drawable.selector_labs_tab);
+        }
+
+        @Override
+        public TabLayout.Tab getTab() {
+            return mTab;
+        }
+
+        @Override
+        public AbstractNavFragment getFragment(Context context) {
+            return LabsFragment.newInstance("from LabsTab in TABS class");
+        }
+
+        @Override
+        public Class<? extends AbstractNavFragment> getNavFragmentClass() {
+            return LabsFragment.class;
+        }
+
+        @Override
+        public boolean shouldBeIncludedInLayout() {
+            return !mIsFreeUser;
+        }
+    }
+
     public class GamesTab extends LumosNavTab {
         private TabLayout.Tab mTab;
 
         public GamesTab(TabLayout tabLayout) {
-            mTab = tabLayout.newTab().setText("GAME");
+            mTab = tabLayout.newTab().setIcon(R.drawable.selector_game_tab);
         }
 
         @Override
@@ -169,7 +230,7 @@ public class LumosTabHolder {
         private TabLayout.Tab mTab;
 
         public MoreTab(TabLayout tabLayout) {
-            mTab = tabLayout.newTab().setText("MORE");
+            mTab = tabLayout.newTab().setIcon(R.drawable.selector_more_tab);
         }
 
         @Override

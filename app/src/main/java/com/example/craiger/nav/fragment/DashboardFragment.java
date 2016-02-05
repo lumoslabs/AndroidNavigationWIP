@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,7 @@ public class DashboardFragment extends AbstractNavFragment {
         mText = getArguments().getString("key", "FORGOT TO ADD KEY");
 
         FrameLayout frame = new FrameLayout(inflater.getContext());
-        frame.setBackgroundColor(getResources().getColor(android.R.color.white, inflater.getContext().getTheme()));
+        frame.setBackgroundColor(ContextCompat.getColor(inflater.getContext(), android.R.color.white));
         frame.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams
             .MATCH_PARENT));
         Button b = new Button(inflater.getContext());
@@ -64,7 +65,7 @@ public class DashboardFragment extends AbstractNavFragment {
             }
         });
         TextView tv = new TextView(inflater.getContext());
-        tv.setTextColor(getResources().getColor(android.R.color.black, inflater.getContext().getTheme()));
+        tv.setTextColor(ContextCompat.getColor(inflater.getContext(), android.R.color.black));
         tv.setText(mText);
         tv.setGravity(Gravity.CENTER);
 

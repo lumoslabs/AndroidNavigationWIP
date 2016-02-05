@@ -3,4 +3,28 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Primary Colors -->
+    <color name="red_orange">#F1693C</color>
+    <color name="dark_teal">#0A5960</color>
+    <color name="teal">#0E91A1</color>
+    <color name="light_teal">#4DBCB6</color>
+    <color name="light_teal_4CB0BB">#4CB0BB</color>
+    <color name="highlight_teal">#60B7C1</color>
+    <color name="golden_lumos">#F9B717</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <!-- Grays -->
+    <color name="light_gray_F3F3F3">#F3F3F3</color>
+    <color name="light_gray_DCDCDC">#DCDCDC</color>
+    <color name="light_gray_A2A4A7">#A2A4A7</color>
+    <color name="light_gray_B3B3B3">#B3B3B3</color>
+    <color name="light_gray_CBCBCB">#CBCBCB</color>
+    <color name="medium_gray_999999">#999999</color>
+    <color name="dark_gray_333333">#333333</color>
+    <color name="games_list_line_gray">#CCCCCC</color>
+    <color name="status_bar_dark_gray">#087581</color>
+    <color name="black_semi_transparent">#66000000</color>
+
 </resources>
